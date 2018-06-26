@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{.namespace}}
+  labels:
+    component: {{.name}} 
+  name: {{.name}}
+spec:
+  clusterIP: None 
+  selector:
+    component: {{.name}}
+  ports:
+    - port: {{svc.port.1}} 
+      targetPort: {{container.pod.1}} 
+      name: {{name.port.1}}
+    - port: {{svc.port.2}} 
+      targetPort: {{container.pod.2}} 
+      name: {{name.port.2}}
+    - port: {{svc.port.3}} 
+      targetPort: {{container.pod.3}} 
+      name: {{name.port.3}}

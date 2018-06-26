@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.name}} 
+  namespace: {{.namespace}}
+data:
+  {{.file}}: |-
+    content.1
+    content.2
+  {{env.1}}: "content.1"
+  {{env.2}}: "content.2"
+  {{env.3}}: "content.3"

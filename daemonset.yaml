@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  labels:
+    component: {{.name}}
+  name: {{.name}}
+  namespace: {{.namespace}}
+spec:
+  selector:
+    matchLabels:
+      component: {{.name}}
+  template:
+    metadata:
+      labels:
+        component: {{.name}}
+    spec:
+      terminationGracePeriodSeconds: 3
+      hostNetwork: true
+      restartPolicy: Always
+      containers:
+        - name: {{.name}}
+          image: {{.image}}:{{.tag}}
+          env:
+            - name: ENV_1
+              value: "1"
+            - name: ENV_2
+              value: "2"
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  name: {{.configmap.name}}
+                  key: {{.configmap.key}}
+          ports:
+            - containerPort: {{.port.1}}
+            - containerPort: {{.port.2}}
+          livenessProbe:
+            exec:
+              command:
+                - /liveness-probe.sh
+            initialDelaySeconds: 15
+            periodSeconds: 5
+          volumeMounts:  
+            - name: host-time
+              mountPath: /etc/localtime
+              readOnly: true
+      nodeSelector:
+        edgenode: "true"
+      volumes:
+        - name: host-time
+          hostPath:
+            path: /etc/localtime
+
