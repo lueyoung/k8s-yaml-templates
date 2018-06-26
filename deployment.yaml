@@ -9,6 +9,7 @@ spec:
     metadata:
       labels:
         component: {{.name}}
+    spec:
       containers:
         - name: {{.name}}
           image: {{.image}}:{{.tag}}
