@@ -41,7 +41,19 @@ spec:
             - name: host-time
               mountPath: /etc/localtime
               readOnly: true
+            - name: {{.claim}}
+              mountPath: {{.mount.path}}
+            - name: {{.config.name}} 
+              mountPath: {{.mount.path}}
+              readOnly: true
+              #subPath: {{.config.file}}
       volumes:
         - name: host-time
           hostPath:
             path: /etc/localtime
+        - name: {{.claim}}
+          persistentVolumeClaim:
+            claimName: {{.claim.name}}
+        - name: {{.config.name}} 
+          configMap:
+            name: {{.configmap.name}}
