@@ -1,0 +1,9 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{.name}} 
+spec:
+  ports:
+    - protocol: TCP 
+      port: {{.port.svc}}
+      targetPort: {{.port.container}}
