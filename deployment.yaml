@@ -13,6 +13,7 @@ spec:
       containers:
         - name: {{.name}}
           image: {{.image}}:{{.tag}}
+          imagePullPolicy: IfNotPresent
           env:
             - name: ENV_1
               value: "1"
