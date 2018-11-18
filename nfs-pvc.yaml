@@ -1,15 +1,15 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{.name}}
+  name: {{.name}} 
   namespace: {{.namespace}}
   annotations:
-    volume.beta.kubernetes.io/storage-class: "managed-nfs-storage"
-    #volume.beta.kubernetes.io/storage-class: "{{storageclass.name}}"
+    volume.beta.kubernetes.io/storage-class: "slow"
+    #volume.beta.kubernetes.io/storage-class: "{{.storageclass.name}}"
 spec:
   accessModes:
-    - ReadWriteMany
-    #- ReadWriteOnce
+    - ReadWriteOnce
+    #- ReadWriteMany
   resources:
     requests:
       storage: {{.n}}Gi

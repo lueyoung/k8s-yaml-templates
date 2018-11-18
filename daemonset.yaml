@@ -21,7 +21,8 @@ spec:
         edgenode: "true"
       containers:
         - name: {{.name}}
-          image: {{.image}}:{{.tag}}
+          image: {{.image}}
+          imagePullPolicy: {{.image.pull.policy}}
           env:
             - name: ENV_1
               value: "1"
