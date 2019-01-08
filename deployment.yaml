@@ -13,7 +13,7 @@ spec:
       containers:
         - name: {{.name}}
           image: {{.image}}
-          imagePullPolicy: {{.iamge.pull.policy}} 
+          imagePullPolicy: {{.image.pull.policy}} 
           env:
             - name: ENV_1
               value: "1"
